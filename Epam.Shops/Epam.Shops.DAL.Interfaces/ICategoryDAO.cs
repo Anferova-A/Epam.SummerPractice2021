@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Shops.DAL.Interfaces
 {
-    public interface CategoryDAO
+    public interface ICategoryDAO
     {
         bool Add(Category newCategory);
         bool Remove(Guid id);

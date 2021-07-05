@@ -2,13 +2,10 @@
 using Epam.Shops.Entities.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Epam.Shops.BLL.Interfaces
+namespace Epam.Shops.DAL.Interfaces
 {
-    public interface UserLogic
+    public interface IUserDAO
     {
         bool Add(User newUser);
         bool Remove(Guid id);

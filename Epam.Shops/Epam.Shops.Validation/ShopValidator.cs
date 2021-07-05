@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Epam.Shops.Entities;
 using FluentValidation;
 
@@ -23,12 +20,6 @@ namespace Epam.Shops.Validation
             RuleFor(shop => shop.Site)
                 .Must(CheckSite)
                 .WithMessage("Некорректное название сайта");
-
-            RuleFor(shop => shop.Category.Name)
-                .NotNull()
-                .NotEmpty()
-                .Must(name => Char.IsUpper(name.First()))
-                .WithMessage("Некорректное название категории");
 
             RuleFor(shop => shop.Category)
                 .NotNull()

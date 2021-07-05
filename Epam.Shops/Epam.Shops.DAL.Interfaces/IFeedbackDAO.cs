@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Epam.Shops.DAL.Interfaces
 {
-    public interface FeedbackDAO
+    public interface IFeedbackDAO
     {
         bool Add(Feedback newFeedback);
         bool Remove(Guid id);
