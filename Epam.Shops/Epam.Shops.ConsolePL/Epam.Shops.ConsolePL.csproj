@@ -39,11 +39,29 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu\AdminMenu.cs" />
+    <Compile Include="Menu\Profile.cs" />
+    <Compile Include="Menu\ShopMenu.cs" />
+    <Compile Include="Menu\ShopReviewer.cs" />
+    <Compile Include="Menu\UserMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\EnumerableUtils.cs" />
+    <Compile Include="Utils\InputUtils.cs" />
+    <Compile Include="Utils\ResponseUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epam.Shops.BLL.Interfaces\Epam.Shops.BLL.Interfaces.csproj">
+      <Project>{4081940B-A9CD-4484-9387-DA43C8A65856}</Project>
+      <Name>Epam.Shops.BLL.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epam.Shops.Entities\Epam.Shops.Entities.csproj">
+      <Project>{A24A9C88-B5A2-4DE2-99BE-568CD39E25B1}</Project>
+      <Name>Epam.Shops.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

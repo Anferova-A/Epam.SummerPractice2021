@@ -9,5 +9,10 @@ namespace Epam.Shops.Entities
         public Shop Shop { get; set; }
         public string Text { get; set; }
         public int Score { get; set; }
+        public DateTime Date { get; set; }
+        public Feedback()
+        {
+            Date = DateTime.Now;
+        }
     }
 }

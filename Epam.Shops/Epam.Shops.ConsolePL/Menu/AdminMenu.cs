@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Epam.Shops.ConsolePL
+namespace Epam.Shops.ConsolePL.Menu
 {
-    class Program
+    class AdminMenu
     {
-        static void Main(string[] args)
-        {
-
-        }
     }
 }
