@@ -41,7 +41,7 @@ namespace Epam.Shops.ConsolePL.Menu
             string select = "";
             while (select != "0")
             {
-                Console.WriteLine(userMenuText);
+                Console.Write(userMenuText);
                 select = Console.ReadLine();
 
                 switch (select)

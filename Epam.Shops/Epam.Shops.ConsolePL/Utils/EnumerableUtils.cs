@@ -25,7 +25,7 @@ namespace Epam.Shops.ConsolePL.Utils
             var i = 1;
             foreach (var item in shops)
             {
-                Console.WriteLine($"{i++}. {item.Name} ({item.Category} адрес: {item.Address})");
+                Console.WriteLine($"{i++}. {item.Name} ({item.Category.Name}, Адрес: {item.Address})");
             }
         }
     }

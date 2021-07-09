@@ -1,32 +1,66 @@
 ﻿using Epam.Shops.DAL.Interfaces;
+using Epam.Shops.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Shops.DAL
 {
     public class ShopDAO : IShopDAO
     {
-        public bool Add(Shops.Entities.Shop newShop)
+        public bool Add(Shop newShop)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Shops.Entities.Shop> GetAll()
+        public IEnumerable<Shop> GetAll()
         {
-            throw new NotImplementedException();
+            List<Shop> result;
+            using (var db = new ShopsDB())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+
+                var queryResult = db.Shops.SqlQuery("GetAllShops");
+                result = LoadShops(db, queryResult);
+            }
+
+            return result;
         }
 
-        public IEnumerable<Shops.Entities.Shop> GetByCategory(Guid categoryId)
+        
+
+        public IEnumerable<Shop> GetByCategory(Guid categoryId)
         {
-            throw new NotImplementedException();
+            List<Shop> result;
+            using (var db = new ShopsDB())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+
+                var param = new SqlParameter("@categoryId", categoryId);
+                var queryResult = db.Shops.SqlQuery("GetShopsByCategory @categoryId", categoryId);
+
+                result = LoadShops(db, queryResult);
+            }
+
+            return result;
         }
 
-        public IEnumerable<Shops.Entities.Shop> GetByName(string name)
+        public IEnumerable<Shop> GetByName(string name)
         {
-            throw new NotImplementedException();
+            List<Shop> result;
+            using(var db = new ShopsDB())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+
+                var param = new SqlParameter("@name", name);
+                var queryResult = db.Shops.SqlQuery("GetShopsByName @name", param);
+
+                result = LoadShops(db, queryResult);
+            }
+
+            return result;
         }
 
         public bool Remove(Guid id)
@@ -34,9 +68,22 @@ namespace Epam.Shops.DAL
             throw new NotImplementedException();
         }
 
-        public bool Update(Shops.Entities.Shop shop)
+        public bool Update(Shop shop)
         {
             throw new NotImplementedException();
+        }
+
+        private List<Shop> LoadShops(ShopsDB db, DbSqlQuery<Shop> queryResult)
+        {
+            var result = new List<Shop>();
+
+            foreach (var item in queryResult.ToList())
+            {
+                db.Entry(item).Reference(s => s.Category).Load();
+                result.Add(item);
+            }
+
+            return result;
         }
     }
 }

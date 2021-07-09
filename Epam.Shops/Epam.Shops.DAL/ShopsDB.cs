@@ -1,10 +1,5 @@
 ﻿using Epam.Shops.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Shops.DAL
 {
@@ -15,10 +10,10 @@ namespace Epam.Shops.DAL
 
         }
 
-        public IDbSet<Category> Categories { get; set; }
-        public IDbSet<Feedback> Feedbacks { get; set; }
-        public IDbSet<Shop> Shops { get; set; }
-        public IDbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Shop> Shops { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
     }

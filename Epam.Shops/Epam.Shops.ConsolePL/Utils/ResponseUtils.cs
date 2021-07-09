@@ -22,7 +22,7 @@ namespace Epam.Shops.ConsolePL.Utils
         {
             foreach (var group in response.Content.GroupBy(f => f.Shop))
             {
-                Console.WriteLine($"{group.Key.Name} ({group.Key.Category}):");
+                Console.WriteLine($"{group.Key.Name} ({group.Key.Category.Name}):");
                 foreach (var item in group)
                 {
                     Console.WriteLine($"\t{item.Date}\n\tОценка: {item.Score}\n\t{item.Text}");

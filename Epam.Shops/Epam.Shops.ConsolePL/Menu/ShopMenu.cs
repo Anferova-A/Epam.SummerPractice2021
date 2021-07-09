@@ -35,7 +35,7 @@ namespace Epam.Shops.ConsolePL.Menu
             string select = "";
             while (select != "0")
             {
-                Console.WriteLine(userMenuText);
+                Console.Write(userMenuText);
                 select = Console.ReadLine();
 
                 switch (select)
@@ -111,7 +111,7 @@ namespace Epam.Shops.ConsolePL.Menu
         {
             collection.ShowShops();
 
-            var select = InputUtils.ReadIntInRange(1, collection.Count(), "Введите номер: ");
+            var select = InputUtils.ReadIntInRange(1, collection.Count(), "Введите номер магазина: ");
 
             return collection.GetByIndex(select - 1);
         }
