@@ -31,7 +31,7 @@ namespace Epam.Shops.Entities
         public bool CheckPassword(string password)
             => Password == Hash(password);
 
-        private string Hash(string text)
+        public static string Hash(string text)
         {
             byte[] data = Encoding.Default.GetBytes(text);
             var result = new SHA256Managed().ComputeHash(data);
