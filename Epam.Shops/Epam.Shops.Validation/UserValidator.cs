@@ -29,6 +29,7 @@ namespace Epam.Shops.Validation
                 .WithMessage("Возраст может быть от {From} до {To}");
 
             RuleFor(user => user.Email)
+                .NotNull()
                 .EmailAddress()
                 .WithMessage("Некорректный email");
 

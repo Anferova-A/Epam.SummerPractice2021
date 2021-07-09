@@ -2,20 +2,20 @@
 using Epam.Shops.Entities;
 using System;
 using Epam.Shops.ConsolePL.Utils;
+using Epam.Shops.Dependency;
+using Ninject;
 
 namespace Epam.Shops.ConsolePL.Menu
 {
     public class UserMenu
     {
+        private IFeedbackLogic _feedbackLogic;
+        
         private User _currentUser;
 
         private Profile _profile;
 
         private ShopMenu _shopMenu;
-
-        private IFeedbackLogic _feedbackLogic;
-
-        private IShopLogic _shopLogic;
 
         public UserMenu(User currentUser)
         {
@@ -23,6 +23,8 @@ namespace Epam.Shops.ConsolePL.Menu
 
             _profile = new Profile(_currentUser);
             _shopMenu = new ShopMenu(_currentUser);
+
+            _feedbackLogic = DependencyKernel.GetKernel().Get<IFeedbackLogic>();
         }
 
         public void Show()

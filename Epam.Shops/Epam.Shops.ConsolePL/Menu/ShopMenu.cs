@@ -1,6 +1,8 @@
 ﻿using Epam.Shops.BLL.Interfaces;
 using Epam.Shops.ConsolePL.Utils;
+using Epam.Shops.Dependency;
 using Epam.Shops.Entities;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +11,15 @@ namespace Epam.Shops.ConsolePL.Menu
 {
     public class ShopMenu
     {
-        private ShopReviewer _shopReviewer;
-
         private IShopLogic _shopLogic;
+        
+        private ShopReviewer _shopReviewer;
 
         public ShopMenu(User currentUser)
         {
             _shopReviewer = new ShopReviewer(currentUser);
+
+            _shopLogic = DependencyKernel.GetKernel().Get<IShopLogic>();
         }
         public void Show()
         {

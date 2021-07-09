@@ -5,19 +5,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{79C180EF-6D36-42F9-ABEE-F046DC61FE6B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Epam.Shops.ConsolePL</RootNamespace>
-    <AssemblyName>Epam.Shops.ConsolePL</AssemblyName>
+    <ProjectGuid>{0E98933F-2537-47A8-84C0-53EA1EEC3EFB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epam.Shops.DAL</RootNamespace>
+    <AssemblyName>Epam.Shops.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,7 +26,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,44 +34,43 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Menu\AdminMenu.cs" />
-    <Compile Include="Menu\Profile.cs" />
-    <Compile Include="Menu\ShopMenu.cs" />
-    <Compile Include="Menu\ShopReviewer.cs" />
-    <Compile Include="Menu\UserMenu.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="CategoryDAO.cs" />
+    <Compile Include="FeedbackDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\EnumerableUtils.cs" />
-    <Compile Include="Utils\InputUtils.cs" />
-    <Compile Include="Utils\ResponseUtils.cs" />
+    <Compile Include="ShopDAO.cs" />
+    <Compile Include="ShopsDB.cs" />
+    <Compile Include="UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Epam.Shops.BLL.Interfaces\Epam.Shops.BLL.Interfaces.csproj">
-      <Project>{4081940B-A9CD-4484-9387-DA43C8A65856}</Project>
-      <Name>Epam.Shops.BLL.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epam.Shops.Dependency\Epam.Shops.Dependency.csproj">
-      <Project>{165FFBAA-5D1E-4531-A1EA-831A5A0EAD7B}</Project>
-      <Name>Epam.Shops.Dependency</Name>
+    <ProjectReference Include="..\Epam.Shops.DAL.Interfaces\Epam.Shops.DAL.Interfaces.csproj">
+      <Project>{13CE99BB-D49B-413E-9D51-1B359BBF4544}</Project>
+      <Name>Epam.Shops.DAL.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epam.Shops.Entities\Epam.Shops.Entities.csproj">
       <Project>{A24A9C88-B5A2-4DE2-99BE-568CD39E25B1}</Project>
       <Name>Epam.Shops.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
