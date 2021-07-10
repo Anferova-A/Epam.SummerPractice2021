@@ -62,20 +62,13 @@ namespace Epam.Shops.BLL
                     Content = _feedbackDAO.GetAll()
             };
 
-        public Response<IEnumerable<Feedback>> GetByCategory(Guid categoryId)
-            => new Response<IEnumerable<Feedback>>()
-            {
-                Success = true,
-                Description = "Операция выполнена успешно",
-                Content = _feedbackDAO.GetByCategory(categoryId)
-            };
 
-        public Response<IEnumerable<Feedback>> GetByShopName(string name)
+        public Response<IEnumerable<Feedback>> GetByShop(Guid shopId)
             => new Response<IEnumerable<Feedback>>()
             {
                 Success = true,
                 Description = "Операция выполнена успешно",
-                Content = _feedbackDAO.GetByShopName(name)
+                Content = _feedbackDAO.GetByShop(shopId)
             };
 
         public Response<IEnumerable<Feedback>> GetByUser(Guid userId)

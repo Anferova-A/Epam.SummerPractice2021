@@ -63,22 +63,6 @@ namespace Epam.Shops.BLL
                  Content = _userDAO.GetAll()
              };
 
-        public Response<IEnumerable<User>> GetByAge(int age)
-            => new Response<IEnumerable<User>>()
-            {
-                Success = true,
-                Description = "Операция выполнена успешно",
-                Content = _userDAO.GetByAge(age)
-            };
-
-        public Response<IEnumerable<User>> GetByGenger(Gender gender)
-            => new Response<IEnumerable<User>>()
-            {
-                Success = true,
-                Description = "Операция выполнена успешно",
-                Content = _userDAO.GetByGenger(gender)
-            };
-
         public Response Remove(Guid id)
         {
             var response = new Response();

@@ -12,8 +12,7 @@ namespace Epam.Shops.BLL.Interfaces
         Response Remove(Guid id);
         Response Update(Feedback feedback);
         Response<IEnumerable<Feedback>> GetAll();
-        Response<IEnumerable<Feedback>> GetByShopName(string name);
-        Response<IEnumerable<Feedback>> GetByCategory(Guid categoryId);
+        Response<IEnumerable<Feedback>> GetByShop(Guid shopId);
         Response<IEnumerable<Feedback>> GetByUser(Guid userId);
     }
 }

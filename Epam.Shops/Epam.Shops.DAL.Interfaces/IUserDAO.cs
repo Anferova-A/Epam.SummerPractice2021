@@ -11,7 +11,5 @@ namespace Epam.Shops.DAL.Interfaces
         bool Remove(Guid id);
         bool Update(User user);
         IEnumerable<User> GetAll();
-        IEnumerable<User> GetByAge(int age);
-        IEnumerable<User> GetByGenger(Gender gender);
     }
 }

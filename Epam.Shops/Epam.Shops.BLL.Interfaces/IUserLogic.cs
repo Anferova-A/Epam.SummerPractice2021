@@ -13,7 +13,5 @@ namespace Epam.Shops.BLL.Interfaces
         Response Remove(Guid id);
         Response Update(User user);
         Response<IEnumerable<User>> GetAll();
-        Response<IEnumerable<User>> GetByAge(int age);
-        Response<IEnumerable<User>> GetByGenger(Gender gender);
     }
 }

@@ -13,8 +13,7 @@ namespace Epam.Shops.DAL.Interfaces
         bool Remove(Guid id);
         bool Update(Feedback feedback);
         IEnumerable<Feedback> GetAll();
-        IEnumerable<Feedback> GetByShopName(string name);
-        IEnumerable<Feedback> GetByCategory(Guid categoryId);
+        IEnumerable<Feedback> GetByShop(Guid shopId);
         IEnumerable<Feedback> GetByUser(Guid userId);
     }
 }
