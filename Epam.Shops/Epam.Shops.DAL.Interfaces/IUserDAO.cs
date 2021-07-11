@@ -10,6 +10,8 @@ namespace Epam.Shops.DAL.Interfaces
         bool Add(User newUser);
         bool Remove(Guid id);
         bool Update(User user);
+        User GetByEmail(string email);
+        bool ContainsEmail(string email);
         IEnumerable<User> GetAll();
     }
 }

@@ -5,7 +5,7 @@ using Epam.Shops.ConsolePL.Utils;
 using Ninject;
 using System;
 
-namespace Epam.Shops.ConsolePL.Menu
+namespace Epam.Shops.ConsolePL.ShopViews
 {
     internal class ShopReviewer
     {
@@ -28,8 +28,8 @@ namespace Epam.Shops.ConsolePL.Menu
 
             var reviewerMenuText = "Возможные действия:" + Environment.NewLine +
                                    "1. Посмотреть отзывы" + Environment.NewLine +
-                                   "2. Оставить отзвы" + Environment.NewLine +
-                                   "0. Выйти" + Environment.NewLine +
+                                   "2. Оставить отзыв" + Environment.NewLine +
+                                   "0. Назад" + Environment.NewLine +
                                    "Выбор: ";
 
             string select = "";

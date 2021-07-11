@@ -38,9 +38,18 @@ namespace Epam.Shops.BLL
 
             if (validateResult.IsValid)
             {
-                _userDAO.Add(newUser);
-                response.Success = true;
-                response.Description = "Операция выполнена успешно";
+                if (!_userDAO.ContainsEmail(newUser.Email))
+                {
+                    _userDAO.Add(newUser);
+                    response.Success = true;
+                    response.Description = "Операция выполнена успешно";
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Description = "Ошибка добавления";
+                    response.Errors.Add("Пользователь с таким email уже существует");
+                }
             }
             else
             {
@@ -55,6 +64,14 @@ namespace Epam.Shops.BLL
             return response;
         }
 
+        public Response<bool> ContainsEmail(string email)
+            => new Response<bool>()
+            {
+                Success = true,
+                Description = "Операция выполнена успешно",
+                Content = _userDAO.ContainsEmail(email)
+            };
+
         public Response<IEnumerable<User>> GetAll()
              => new Response<IEnumerable<User>>()
              {
@@ -62,6 +79,28 @@ namespace Epam.Shops.BLL
                  Description = "Операция выполнена успешно",
                  Content = _userDAO.GetAll()
              };
+
+        public Response<User> GetByEmail(string email)
+        {
+            var response = new Response<User>();
+
+            var user = _userDAO.GetByEmail(email);
+
+            if (user != null)
+            {
+                response.Success = true;
+                response.Description = "Операция выполнена успешно";
+                response.Content = user;
+            }
+            else
+            {
+                response.Success = false;
+                response.Description = "Операция не выполнена";
+                response.Errors.Add("Пользователь с таким email не найден");
+            }
+
+            return response;
+        }
 
         public Response Remove(Guid id)
         {
@@ -86,16 +125,39 @@ namespace Epam.Shops.BLL
         {
             var response = new Response();
 
-            if (_userDAO.Update(user))
+            var validateResult = _validator.Validate(user);
+
+            if (validateResult.IsValid)
             {
-                response.Success = true;
-                response.Description = "Операция выполнена успешно";
+                if (_userDAO.GetByEmail(user.Email).Id == user.Id)
+                {
+                    if (_userDAO.Update(user))
+                    {
+                        response.Success = true;
+                        response.Description = "Операция выполнена успешно";
+                    }
+                    else
+                    {
+                        response.Success = false;
+                        response.Description = "Операция не выполнена";
+                        response.Errors.Add("Объект не найден");
+                    }
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Description = "Ошибка обновления";
+                    response.Errors.Add("Пользователь с таким email уже существует");
+                }
             }
             else
             {
                 response.Success = false;
-                response.Description = "Операция не выполнена";
-                response.Errors.Add("Объект не найден");
+                response.Description = "Ошибка валидации";
+                foreach (var error in validateResult.Errors)
+                {
+                    response.Errors.Add(error.ErrorMessage);
+                }
             }
 
             return response;

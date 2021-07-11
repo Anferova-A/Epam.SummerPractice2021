@@ -1,4 +1,4 @@
-﻿using Epam.Shops.ConsolePL.Menu;
+﻿using Epam.Shops.ConsolePL.UserViews;
 using Epam.Shops.Entities;
 using Epam.Shops.Entities.Enums;
 using System;
@@ -19,12 +19,13 @@ namespace Epam.Shops.ConsolePL
                 FirstName = "Наталия",
                 LastName = "Растопшина",
                 Email = "rastopchyanin@list.ru",
+                Age = 14,
                 Password = User.Hash("12aa"),
                 Gender = Gender.NotSpecified,
                 PhoneNumber = "+79195237656"
             };
 
-            new UserMenu(user2).Show();
+            new Authorization().Show();
         }
     }
 }

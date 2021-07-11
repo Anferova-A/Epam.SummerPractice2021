@@ -30,6 +30,29 @@ namespace Epam.Shops.DAL
             return result == -1;
         }
 
+        public User GetByEmail(string email)
+        {
+            User result;
+            using (var db = new ShopsDB())
+            {
+                var param = new SqlParameter("@email", email);
+                result = db.Users.SqlQuery("GetUserByEmail @email", param).FirstOrDefault();
+            }
+
+            return result;
+        }
+        public bool ContainsEmail(string email)
+        {
+            bool result;
+            using (var db = new ShopsDB())
+            {
+                var param = new SqlParameter("@email", email);
+                result = db.Users.SqlQuery("GetUserByEmail @email", param).Count() != 0;
+            }
+
+            return result;
+        }
+
         public IEnumerable<User> GetAll()
         {
             List<User> result;
@@ -40,6 +63,8 @@ namespace Epam.Shops.DAL
 
             return result;
         }
+
+       
 
         public bool Remove(Guid id)
         {

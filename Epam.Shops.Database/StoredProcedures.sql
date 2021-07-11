@@ -1,6 +1,6 @@
 USE [ShopsDB]
 GO
-/****** Object:  StoredProcedure [dbo].[AddCategory]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[AddCategory]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,7 @@ AS
 	INSERT [dbo].[Categories] ([Id], [Name])  
 	VALUES (@id, @name)
 GO
-/****** Object:  StoredProcedure [dbo].[AddFeedback]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[AddFeedback]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -28,7 +28,7 @@ AS
 	INSERT [dbo].[Feedbacks] ([Id], [Text], [Score], [Date], [Shop_Id], [User_Id]) 
 	VALUES (@id, @text, @score, @date, @shop_id, @user_id)
 GO
-/****** Object:  StoredProcedure [dbo].[AddShop]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[AddShop]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -43,7 +43,7 @@ AS
 	INSERT [dbo].[Shops] ([Id], [Name], [Site], [Address], [Category_Id]) 
 	VALUES (@id, @name, @site, @address, @category_id)
 GO
-/****** Object:  StoredProcedure [dbo].[AddUser]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[AddUser]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -61,7 +61,7 @@ AS
 	INSERT [dbo].[Users] ([Id], [FirstName], [LastName], [Age], [Gender], [Email], [PhoneNumber], [Password])  
 	VALUES (@id, @first_name, @last_name, @age, @gender, @email, @phone_number, @password)
 GO
-/****** Object:  StoredProcedure [dbo].[GetAllCategories]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetAllCategories]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -71,7 +71,7 @@ CREATE PROCEDURE [dbo].[GetAllCategories]
 AS
 	SELECT * FROM Categories
 GO
-/****** Object:  StoredProcedure [dbo].[GetAllFeedbacks]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetAllFeedbacks]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -80,7 +80,7 @@ CREATE PROCEDURE [dbo].[GetAllFeedbacks]
 AS
 	SELECT * FROM Feedbacks
 GO
-/****** Object:  StoredProcedure [dbo].[GetAllShops]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetAllShops]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -89,7 +89,7 @@ CREATE PROCEDURE [dbo].[GetAllShops]
 AS
 	SELECT * FROM Shops
 GO
-/****** Object:  StoredProcedure [dbo].[GetAllUsers]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetAllUsers]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ CREATE PROCEDURE [dbo].[GetAllUsers]
 AS
 	SELECT * FROM Users
 GO
-/****** Object:  StoredProcedure [dbo].[GetFeedbacksByShop]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetFeedbacksByShop]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,7 +109,7 @@ AS
 	SELECT * FROM Feedbacks
 	WHERE Shop_Id = @shop_id
 GO
-/****** Object:  StoredProcedure [dbo].[GetFeedbacksByUser]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetFeedbacksByUser]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -120,7 +120,7 @@ AS
 	SELECT * FROM Feedbacks
 	WHERE User_Id = @id
 GO
-/****** Object:  StoredProcedure [dbo].[GetShopsByCategory]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetShopsByCategory]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -129,9 +129,9 @@ CREATE PROCEDURE [dbo].[GetShopsByCategory]
 	@categoryId uniqueidentifier
 AS
 	SELECT * FROM Shops
-	WHERE Category_Id = Id
+	WHERE Category_Id = @categoryId
 GO
-/****** Object:  StoredProcedure [dbo].[GetShopsByName]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetShopsByName]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -142,7 +142,18 @@ AS
 	SELECT * FROM Shops 
 	WHERE @name = Name
 GO
-/****** Object:  StoredProcedure [dbo].[RemoveCategory]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[GetUserByEmail]    Script Date: 11.07.2021 18:31:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetUserByEmail]
+	@email nvarchar(max)
+AS
+	SELECT * FROM Users
+	WHERE [Email] = @email
+GO
+/****** Object:  StoredProcedure [dbo].[RemoveCategory]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -154,7 +165,7 @@ AS
 	WHERE Id = @id
 RETURN @@ROWCOUNT
 GO
-/****** Object:  StoredProcedure [dbo].[RemoveFeedback]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[RemoveFeedback]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +177,7 @@ AS
 	WHERE Id = @id
 RETURN @@ROWCOUNT
 GO
-/****** Object:  StoredProcedure [dbo].[RemoveShop]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[RemoveShop]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -178,7 +189,7 @@ AS
 	WHERE Id = @id
 RETURN @@ROWCOUNT
 GO
-/****** Object:  StoredProcedure [dbo].[RemoveUser]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[RemoveUser]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -190,7 +201,7 @@ AS
 	WHERE Id = @id
 RETURN @@ROWCOUNT
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateCategory]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateCategory]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -204,7 +215,7 @@ AS
 	WHERE Id = @id
 RETURN @@ROWCOUNT
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateFeedback]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateFeedback]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -226,7 +237,7 @@ AS
 	WHERE Id = @id
 RETURN @@ROWCOUNT
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateShop]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateShop]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -246,7 +257,7 @@ AS
 	WHERE Id = @id
 RETURN @@ROWCOUNT
 GO
-/****** Object:  StoredProcedure [dbo].[UpdateUser]    Script Date: 11.07.2021 1:12:40 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateUser]    Script Date: 11.07.2021 18:31:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

@@ -52,7 +52,7 @@ namespace Epam.Shops.DAL
                 db.Configuration.LazyLoadingEnabled = false;
 
                 var param = new SqlParameter("@categoryId", categoryId);
-                var queryResult = db.Shops.SqlQuery("GetShopsByCategory @categoryId", categoryId);
+                var queryResult = db.Shops.SqlQuery("GetShopsByCategory @categoryId", param);
 
                 result = LoadShops(db, queryResult);
             }

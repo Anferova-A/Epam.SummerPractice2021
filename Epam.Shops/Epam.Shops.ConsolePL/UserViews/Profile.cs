@@ -6,7 +6,7 @@ using Epam.Shops.Entities.Enums;
 using Ninject;
 using System;
 
-namespace Epam.Shops.ConsolePL.Menu
+namespace Epam.Shops.ConsolePL.UserViews
 {
     internal class Profile
     {
@@ -25,7 +25,7 @@ namespace Epam.Shops.ConsolePL.Menu
         {
             ShowInfo();
 
-            string prifileMenuText = "Возможные действия:" +
+            string prifileMenuText = "Возможные действия:" + Environment.NewLine +
                                      "\t1. Изменить информацию" + Environment.NewLine +
                                      "\t2. Сменить пароль" + Environment.NewLine +
                                      "\t0. Назад" + Environment.NewLine +
@@ -57,7 +57,7 @@ namespace Epam.Shops.ConsolePL.Menu
 
         private void EditProfile()
         {
-            string editProfileText = "Изменить:" +
+            string editProfileText = "Изменить:" + Environment.NewLine +
                                      "\t1. Имя" + Environment.NewLine +
                                      "\t2. Фамилию" + Environment.NewLine +
                                      "\t3. Возраст" + Environment.NewLine +
@@ -182,11 +182,11 @@ namespace Epam.Shops.ConsolePL.Menu
         {
             Console.WriteLine();
 
-            Console.WriteLine("Старое значение: " + _currentUser.Gender.ToString());
+            Console.WriteLine("Старое значение: " + _currentUser.Gender.ToStringRus());
             Console.WriteLine();
-            Console.WriteLine("0. NotSpecified");
-            Console.WriteLine("1. Male");
-            Console.WriteLine("2. Female");
+            Console.WriteLine("0. Не указан");
+            Console.WriteLine("1. Мужской");
+            Console.WriteLine("2. Женский");
             Console.Write("Новое значение: ");
             var newGender = (Gender)InputUtils.ReadIntInRange(0, 2);
 
@@ -290,7 +290,7 @@ namespace Epam.Shops.ConsolePL.Menu
             Console.WriteLine("\tИмя: " + _currentUser.FirstName);
             Console.WriteLine("\tФамилия: " + _currentUser.LastName);
             Console.WriteLine("\tВозвраст: " + _currentUser.Age);
-            Console.WriteLine("\tПол: " + _currentUser.Gender.ToString());
+            Console.WriteLine("\tПол: " + _currentUser.Gender.ToStringRus());
             Console.WriteLine("\tНомер телефона: " + _currentUser?.PhoneNumber);
             Console.WriteLine("\tEmail: " + _currentUser.Email);
         }
@@ -299,11 +299,14 @@ namespace Epam.Shops.ConsolePL.Menu
         {
             var newUser = new User();
 
+            newUser.Id = oldUser.Id;
             newUser.FirstName = oldUser.FirstName;
             newUser.LastName = oldUser.LastName;
             newUser.Age = oldUser.Age;
             newUser.PhoneNumber = oldUser.PhoneNumber;
             newUser.Email = oldUser.Email;
+            newUser.Password = oldUser.Password;
+
 
             return newUser;
         }

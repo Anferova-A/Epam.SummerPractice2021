@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Epam.Shops.ConsolePL.Menu
+namespace Epam.Shops.ConsolePL.ShopViews
 {
     public class ShopMenu
     {

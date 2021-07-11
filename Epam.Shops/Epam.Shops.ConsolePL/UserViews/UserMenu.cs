@@ -6,8 +6,9 @@ using Epam.Shops.Dependency;
 using Ninject;
 using System.Collections.Generic;
 using System.Linq;
+using Epam.Shops.ConsolePL.ShopViews;
 
-namespace Epam.Shops.ConsolePL.Menu
+namespace Epam.Shops.ConsolePL.UserViews
 {
     public class UserMenu
     {

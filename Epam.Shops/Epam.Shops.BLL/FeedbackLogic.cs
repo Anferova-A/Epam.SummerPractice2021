@@ -102,16 +102,30 @@ namespace Epam.Shops.BLL
         {
             var response = new Response();
 
-            if (_feedbackDAO.Update(feedback))
+            var validateResult = _validator.Validate(feedback);
+
+            if (validateResult.IsValid)
             {
-                response.Success = true;
-                response.Description = "Операция выполнена успешно";
+                if (_feedbackDAO.Update(feedback))
+                {
+                    response.Success = true;
+                    response.Description = "Операция выполнена успешно";
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Description = "Операция не выполнена";
+                    response.Errors.Add("Объект не найден");
+                }
             }
             else
             {
                 response.Success = false;
-                response.Description = "Операция не выполнена";
-                response.Errors.Add("Объект не найден");
+                response.Description = "Ошибка валидации";
+                foreach (var error in validateResult.Errors)
+                {
+                    response.Errors.Add(error.ErrorMessage);
+                }
             }
 
             return response;

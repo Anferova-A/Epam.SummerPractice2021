@@ -12,6 +12,8 @@ namespace Epam.Shops.BLL.Interfaces
         Response Add(User newUser);
         Response Remove(Guid id);
         Response Update(User user);
+        Response<bool> ContainsEmail(string email);
+        Response<User> GetByEmail(string email);
         Response<IEnumerable<User>> GetAll();
     }
 }
