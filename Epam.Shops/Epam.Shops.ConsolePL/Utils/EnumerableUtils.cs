@@ -28,5 +28,14 @@ namespace Epam.Shops.ConsolePL.Utils
                 Console.WriteLine($"{i++}. {item.Name} ({item.Category.Name}, Адрес: {item.Address})");
             }
         }
+
+        public static void ShowCategories(this IEnumerable<Category> categories)
+        {
+            var i = 1;
+            foreach (var item in categories)
+            {
+                Console.WriteLine($"{i++}. {item.Name}");
+            }
+        }
     }
 }

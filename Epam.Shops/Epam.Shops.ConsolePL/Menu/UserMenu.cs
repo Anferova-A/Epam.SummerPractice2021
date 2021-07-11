@@ -4,6 +4,8 @@ using System;
 using Epam.Shops.ConsolePL.Utils;
 using Epam.Shops.Dependency;
 using Ninject;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Epam.Shops.ConsolePL.Menu
 {
@@ -67,15 +69,44 @@ namespace Epam.Shops.ConsolePL.Menu
 
         private void ShowFeedbacks()
         {
-            var response = _feedbackLogic.GetByUser(_currentUser.Id);
-            if (response.Success)
+            var responseShow = _feedbackLogic.GetByUser(_currentUser.Id);
+            if (responseShow.Success)
             {
-                response.ShowFeedbacksWithoutUser();
+                responseShow.ShowFeedbacksWithoutUser();
             }
             else
             {
-                response.ShowResponse();
+                responseShow.ShowResponse();
             }
+
+            Console.WriteLine();
+            Console.WriteLine("\t1. Удалить отзыв");
+            Console.WriteLine("\t0. Назад");
+
+            var select = InputUtils.ReadIntInRange(0, 1, "Выбор: ");
+
+            if (select == 0)
+                return;
+
+            var removedFeedback = SelectFeedback(responseShow.Content);
+
+            var responseRemove = _feedbackLogic.Remove(removedFeedback.Id);
+
+            if (responseRemove.Success)
+            {
+                Console.WriteLine("Отзыв успешно удален");
+            }
+            else
+            {
+                responseRemove.ShowResponse();
+            }
+        }
+
+        private Feedback SelectFeedback(IEnumerable<Feedback> collection)
+        {
+            var select = InputUtils.ReadIntInRange(1, collection.Count(), "Введите номер отзыва: ");
+
+            return collection.GetByIndex(select - 1);
         }
 
     }

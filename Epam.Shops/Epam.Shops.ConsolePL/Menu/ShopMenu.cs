@@ -12,6 +12,7 @@ namespace Epam.Shops.ConsolePL.Menu
     public class ShopMenu
     {
         private IShopLogic _shopLogic;
+        private ICategoryLogic _caegoryLogic;
         
         private ShopReviewer _shopReviewer;
 
@@ -20,6 +21,7 @@ namespace Epam.Shops.ConsolePL.Menu
             _shopReviewer = new ShopReviewer(currentUser);
 
             _shopLogic = DependencyKernel.GetKernel().Get<IShopLogic>();
+            _caegoryLogic = DependencyKernel.GetKernel().Get<ICategoryLogic>();
         }
         public void Show()
         {
@@ -29,7 +31,7 @@ namespace Epam.Shops.ConsolePL.Menu
                 "\t1. По названию\n" +
                 "\t2. По категории\n" +
                 "\t3. Показать все\n" +
-                "\t0. Выйти\n" +
+                "\t0. Назад\n" +
                 "Ввод: ";
 
             string select = "";
@@ -75,18 +77,26 @@ namespace Epam.Shops.ConsolePL.Menu
 
         private void FindByCategory()
         {
-            Category category = null;
-            // TODO: получить категорию
-
-            var response = _shopLogic.GetByCategory(category.Id);
-
-            if (!response.Success)
+            // find category
+            var responseCategories = _caegoryLogic.GetAll();
+            if (!responseCategories.Success)
             {
-                response.ShowResponse();
+                responseCategories.ShowResponse();
                 return;
             }
 
-            _shopReviewer.CurrentShop = SelectShop(response.Content);
+            var category = SelectCategory(responseCategories.Content);
+
+            // find shop by category
+            var responseShops = _shopLogic.GetByCategory(category.Id);
+
+            if (!responseShops.Success)
+            {
+                responseShops.ShowResponse();
+                return;
+            }
+
+            _shopReviewer.CurrentShop = SelectShop(responseShops.Content);
             _shopReviewer.Show();
         }
 
@@ -115,5 +125,15 @@ namespace Epam.Shops.ConsolePL.Menu
 
             return collection.GetByIndex(select - 1);
         }
+
+        private Category SelectCategory(IEnumerable<Category> collection)
+        {
+            collection.ShowCategories();
+
+            var select = InputUtils.ReadIntInRange(1, collection.Count(), "Введите номер категории: ");
+
+            return collection.GetByIndex(select - 1);
+        }
+
     }
 }

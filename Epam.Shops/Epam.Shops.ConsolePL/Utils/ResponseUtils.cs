@@ -20,13 +20,32 @@ namespace Epam.Shops.ConsolePL.Utils
 
         public static void ShowFeedbacksWithoutUser(this Response<IEnumerable<Feedback>> response)
         {
+            int i = 1;
+
             foreach (var group in response.Content.GroupBy(f => f.Shop))
             {
                 Console.WriteLine($"{group.Key.Name} ({group.Key.Category.Name}):");
                 foreach (var item in group)
                 {
-                    Console.WriteLine($"\t{item.Date}\n\tОценка: {item.Score}\n\t{item.Text}");
+                    Console.WriteLine($"\tОтзыв №{i++}. {item.Date}\n\tОценка: {item.Score}\n\t{item.Text}");
                 }
+                Console.WriteLine();
+            }
+        }
+
+        public static void ShowFeedbacksWithoutShop(this Response<IEnumerable<Feedback>> response)
+        {
+            foreach (var feedback in response.Content.OrderBy(f => f.Date))
+            {
+                Console.WriteLine();
+                Console.WriteLine("-----------------------------------------");
+
+                Console.WriteLine(feedback.Date);
+                Console.WriteLine($"Пользователь: {feedback.User.FirstName} {feedback.User.LastName}");
+                Console.WriteLine("Оценка: " + feedback.Score);
+                Console.WriteLine("Отзыв: " + feedback.Text);
+
+                Console.WriteLine("-----------------------------------------");
                 Console.WriteLine();
             }
         }
